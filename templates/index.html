@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الرئيسية</title>
+    <link rel="stylesheet" href="{% static 'style/index.css' %}">    
+</head>
+<body>
+    
+    <img src="{% static 'images/bg.png' %}" alt="" class="bg">
+
+    <div class="nav">
+        <div class="btns">
+            {% if c_user %}
+                <a href="{% url 'post' %}" class="upload">ارفع منشورك</a>
+                <a href="{% url 'logout' %}" class="logout">تسجيل الخروج</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="login">تسجيل الدخول</a>
+                <a href="{% url 'register' %}" class="register">انشاء حساب</a>
+            {% endif %}    
+        </div>
+        <h1>الرئيسية</h1>
+    </div>
+
+    <div class="content">
+        
+        {% for post in posts %}
+            <div class="post">
+                <div class="details">
+                    <small>{{post.created_at}}</small>
+                    <small>{{post.user.full_name}}</small>
+                </div>
+                <div class="info">
+
+                    <div class="block">
+                        <small>المبني</small>
+                        <img width="38px" height="auto" src="{% static 'images/building.png' %}" alt="">
+                        <small>{{post.building_name}}</small>
+                    </div>
+
+                    <div class="block">
+                        <small>الدور</small>
+                        <img width="38px" height="auto" src="{% static 'images/floor.png' %}" alt="">
+                        <small>{{post.floor_number}}</small>
+                    </div>
+
+                    <div class="block">
+                        <small>رقم الغرفة</small>
+                        <img width="38px" height="auto" src="{% static 'images/roomNumber.png' %}" alt="">
+                        <small>{{post.room_number}}</small>
+                    </div>
+
+                </div>
+                
+                <a href="#" class="des" data-des="{{post.description}}">الوصف</a>
+                <a href="https://wa.me/+2{{post.user.phonenumber}}" target="_blank" class="contact">
+                    <p>التواصل </p>
+                    <img width="38px" height="auto" src="{% static 'images/whatsapp.png' %}" alt="">
+                </a>
+
+            </div>
+        {% endfor %}
+
+
+    </div>
+
+    <script>
+        document.querySelectorAll('.des').forEach(i=>{
+            i.addEventListener('click',()=>{
+                alert(i.dataset.des)
+            })
+        })
+    </script>
+
+</body>
+</html>

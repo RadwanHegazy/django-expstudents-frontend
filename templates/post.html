@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ارفع منشور</title>
+    <link rel="stylesheet" href="{% static 'style/form.css' %}">
+</head>
+<body>
+    
+    <img src="{% static 'images/bg.png' %}" alt="" class="bg">
+
+
+    <form class="container" method="POST">
+        {% csrf_token %}
+        <input type="text" name="building_name" placeholder="اسم المبني">
+        <input type="number" name="floor_number" placeholder="رقم الطابق">
+        <input type="number" name="room_number" placeholder="رقم الغرفة">
+        <textarea name="description" id="" placeholder="الوصف"></textarea>
+        <div class="btns">
+            <a href="{% url 'home' %}">الرئيسية </a>
+            <button type="submit">رفع</button>
+        </div>
+    </form>
+
+</body>
+</html>
